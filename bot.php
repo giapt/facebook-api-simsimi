@@ -37,6 +37,7 @@ function talkToSimsimi($text) {
 
 if (!empty($_GET)) {
 	$text = $_GET["message"];
+	var_dump($_GET);
 }else{
 	$text = "hello";
 }
