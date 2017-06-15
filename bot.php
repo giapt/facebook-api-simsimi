@@ -1,6 +1,7 @@
 <?php
 
-
+$current_path = __FILE__;
+$base_folder = str_replace("bot.php", "", $current_path);
 $config = [
     'simsimi' => [
         // 'endpoint' => 'http://api.simsimi.com/request.p',    // paid key
@@ -28,6 +29,10 @@ function talkToSimsimi($text) {
             ."&lc=".$config['simsimi']['locale']
             ."&ft=1.0&text=".urlencode($text));
     $arr = json_decode($json, true);
+    $myfile = fopen($base_folder."log.csv", "a") or die("Unable to open file!");
+    fputcsv($myfile,$arr);
+    fclose($myfile);
+
     if(empty($arr['response'])) {
         // This trial api will have less db. Use paid key for full db. I don't try so I don't know it worth or not?
         $arr['response'] = "[Simsimi not response.]";
@@ -45,7 +50,7 @@ if (!empty($_GET)) {
 
 echo '{
  "messages": [
-   {"text":"'
+   {"text":"';
 echo talkToSimsimi($text);
 echo '"}
  ]
