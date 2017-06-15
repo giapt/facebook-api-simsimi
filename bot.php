@@ -36,14 +36,18 @@ function talkToSimsimi($text) {
 }
 
 if (!empty($_GET)) {
-	var_dump($_GET);die();
 	$text = $_GET["message"];
-	$text = json_decode($text, true);
-	$text = $text["message"];
+	// $text = json_decode($text, true);
+	// $text = $text["message"];
 }else{
 	$text = "hello";
 }
 
+echo '{
+ "messages": [
+   {"text":"'
 echo talkToSimsimi($text);
-
+echo '"}
+ ]
+}';
 ?>
