@@ -36,8 +36,10 @@ function talkToSimsimi($text) {
 }
 
 if (!empty($_GET)) {
+	var_dump($_GET);die();
 	$text = $_GET["message"];
-	var_dump($_GET);
+	$text = json_decode($text, true);
+	$text = $text["message"];
 }else{
 	$text = "hello";
 }
